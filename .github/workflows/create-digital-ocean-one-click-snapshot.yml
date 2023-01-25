@@ -14,7 +14,11 @@ jobs:
         run: packer init digital-ocean-one-click/image.pkr.hcl
 
       - name: Validate packer config
-        run: DIGITAL_OCEAN_TOKEN=${{ secrets.DIGITAL_OCEAN_TOKEN }} packer validate digital-ocean-one-click/image.pkr.hcl
+        run: packer validate digital-ocean-one-click/image.pkr.hcl
+        env:
+          DIGITAL_OCEAN_TOKEN: ${{ secrets.DIGITAL_OCEAN_TOKEN }}
 
       - name: Run packer builder
-        run: DIGITAL_OCEAN_TOKEN=${{ secrets.DIGITAL_OCEAN_TOKEN }} packer build digital-ocean-one-click/image.pkr.hcl
+        run: packer build digital-ocean-one-click/image.pkr.hcl
+        env:
+          DIGITAL_OCEAN_TOKEN: ${{ secrets.DIGITAL_OCEAN_TOKEN }}
