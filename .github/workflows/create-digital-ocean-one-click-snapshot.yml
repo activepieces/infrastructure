@@ -7,7 +7,7 @@ jobs:
   packer-build-snapshot:
     runs-on: "ubuntu-latest"
     env:
-      DIGITAL_OCEAN_TOKEN: ${{ secrets.DIGITAL_OCEAN_TOKEN }}
+      DIGITAL_OCEAN_TOKEN: 123
     steps:
       - name: Checkout
         uses: actions/checkout@v3
