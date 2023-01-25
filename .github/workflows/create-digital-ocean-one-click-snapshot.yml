@@ -1,0 +1,22 @@
+name: "Create Digital Ocean one-click snapshot"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  packer-build-snapshot:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Init packer
+        run: packer init digital-ocean-one-click/image.pkr.hcl
+
+      - name: Validate packer config
+        run: packer validate digital-ocean-one-click/image.pkr.hcl
+
+      - name: Run packer builder
+        run: packer build digital-ocean-one-click/image.pkr.hcl
+        env:
+          DIGITAL_OCEAN_TOKEN: ${{ secrets.DIGITAL_OCEAN_TOKEN }}
