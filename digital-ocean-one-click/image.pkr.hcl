@@ -8,7 +8,7 @@ packer {
 }
 
 source "digitalocean" "one_click" {
-  api_key       = env("DIGITAL_OCEAN_TOKEN")
+  api_token       = env("DIGITAL_OCEAN_TOKEN")
   image         = "ubuntu-22-04-x64"
   region        = "fra1"
   size          = "s-1vcpu-512mb-10gb"
