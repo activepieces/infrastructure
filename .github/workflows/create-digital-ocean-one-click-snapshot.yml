@@ -6,13 +6,7 @@ on:
 jobs:
   packer-build-snapshot:
     runs-on: "ubuntu-latest"
-    env:
-      DIGITAL_OCEAN_TOKEN: ${{ secrets.DIGITAL_OCEAN_TOKEN }}
-      MY_SECRET: "123"
     steps:
-      - name: Print env var
-        run: echo $MY_SECRET
-
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -20,7 +14,7 @@ jobs:
         run: packer init digital-ocean-one-click/image.pkr.hcl
 
       - name: Validate packer config
-        run: packer validate digital-ocean-one-click/image.pkr.hcl
+        run: DIGITAL_OCEAN_TOKEN=${{ secrets.DIGITAL_OCEAN_TOKEN }} packer validate digital-ocean-one-click/image.pkr.hcl
 
       - name: Run packer builder
-        run: packer build digital-ocean-one-click/image.pkr.hcl
+        run: DIGITAL_OCEAN_TOKEN=${{ secrets.DIGITAL_OCEAN_TOKEN }} packer build digital-ocean-one-click/image.pkr.hcl
